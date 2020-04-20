@@ -1,0 +1,30 @@
+ AREA LARGESTSMALLEST,CODE,READONLY 
+ENTRY  
+	 MOV R1,#0x00000004
+	 MOV R2,#0x40000000
+	 MOV R3,#0x4000001C
+	 MOV R6,#0x40000020
+	 LDR R7,[R2]
+	 LDR R4,[R2]
+LOOP
+	 ADD R2,R2,#04
+         LDR R5,[R2]  	
+         MOV R9,R5	 
+	 CMP R4,R5
+	 BHI LOOP1 
+	 MOV R4,R5
+LOOP1
+         CMP R7,R9
+	 BLS LOOP2
+	 MOV R7,R9
+LOOP2  
+       SUB R1,R1,#01
+       CMP R1,#00
+       BNE LOOP
+       STR R7,[R6]
+	   STR R4,[R3]
+       
+	   NOP
+       
+	   NOP
+   END	  
